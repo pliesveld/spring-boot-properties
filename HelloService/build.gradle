@@ -1,0 +1,60 @@
+plugins {
+	id 'org.springframework.boot' version '1.5.2.RELEASE'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+bootRepackage {
+	mainClass = 'com.pliesveld.discgolf.DiscgolfApplication'
+}
+
+bootRun {
+	jvmArgs = [
+//  uncomment the folowin line for remote debugging
+//	"-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005",
+	]
+}
+
+task fatjar(type: BootRepackage, dependsOn: jar) {
+	executable = true
+}
+
+jar {
+	baseName = 'helloworld'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url { "https://repo.spring.io/milestone" } }
+	maven { url { "https://repo.spring.io/snapshot" } }
+}
+
+configurations {
+    resolutionStrategy {
+        all*.exclude group: 'log4j', module: 'log4j'
+        all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        all*.exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+        all*.exclude group: 'ch.qos.logback', module: 'logback-core'
+        all*.exclude group: 'ch.qos.logback', module: 'logback-classic'
+        all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        all*.exclude group: 'org.springframework.boot', module: 'logback-classic'
+        all*.exclude group: 'org.springframework.boot', module: 'logback-core'
+    }
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-log4j2')
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+	compile 'org.slf4j:slf4j-api:1.7.21'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'junit:junit:4.12'
+}
+
