@@ -12,8 +12,6 @@ import io.restassured.RestAssured;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Set;
-
 import static org.junit.Assert.*;
 
 public class RestAssuredTestExecutionListener extends AbstractTestExecutionListener {

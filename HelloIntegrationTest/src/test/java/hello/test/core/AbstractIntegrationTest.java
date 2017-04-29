@@ -20,7 +20,7 @@ import hello.Application;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestExecutionListeners(listeners= {DependencyInjectionTestExecutionListener.class, RestAssuredTestExecutionListener.class})
+@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class, RestAssuredTestExecutionListener.class})
 public class AbstractIntegrationTest {
     private static final Logger LOG = LogManager.getLogger();
 

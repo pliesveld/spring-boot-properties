@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+
 task wrapper(type: Wrapper) {
     gradleVersion = "3.3"
 }
@@ -11,6 +12,12 @@ sourceCompatibility = 1.8
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
+    apply plugin: 'checkstyle'
+
+    checkstyle {
+        sourceSets = Collections.singletonList(sourceSets.main)
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    }
 
     repositories {
         mavenCentral()
