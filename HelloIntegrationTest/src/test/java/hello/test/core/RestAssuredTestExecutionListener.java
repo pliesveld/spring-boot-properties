@@ -9,6 +9,9 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import io.restassured.RestAssured;
+import io.restassured.config.LogConfig;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.parsing.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,6 +37,8 @@ public class RestAssuredTestExecutionListener extends AbstractTestExecutionListe
         LOG.trace("EmbeddedServerletContainer port: {}",server.getEmbeddedServletContainer().getPort());
 
         RestAssured.port = port;
+        RestAssured.defaultParser = Parser.JSON;
+        RestAssured.config = RestAssured.config().logConfig(LogConfig.logConfig().enablePrettyPrinting(true).enableLoggingOfRequestAndResponseIfValidationFails().enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL));
     }
 
     @Override
