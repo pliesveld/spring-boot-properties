@@ -34,5 +34,11 @@ public class PetIntegrationTest extends AbstractIntegrationTest {
     public void givenPets_shouldBeIterable() throws Exception {
         get("/pet").then().body("$", iterableWithSize(2));
     }
+
+    @Test
+    public void whenPost_should200() throws Exception {
+        String jsonStr = loadJson("simple_pet.json");
+        given().body(jsonStr).post("/pet").then().statusCode(200);
+    }
 }
 

@@ -9,8 +9,12 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.config.HeaderConfig;
 import io.restassured.config.LogConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +42,7 @@ public class RestAssuredTestExecutionListener extends AbstractTestExecutionListe
 
         RestAssured.port = port;
         RestAssured.defaultParser = Parser.JSON;
+        RestAssured.requestSpecification = new RequestSpecBuilder().setAccept(ContentType.JSON).setContentType(ContentType.JSON).build();
         RestAssured.config = RestAssured.config().logConfig(LogConfig.logConfig().enablePrettyPrinting(true).enableLoggingOfRequestAndResponseIfValidationFails().enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL));
     }
 
