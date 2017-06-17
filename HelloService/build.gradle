@@ -12,8 +12,7 @@ bootRepackage {
 
 bootRun {
 	jvmArgs = [
-//  uncomment the folowin line for remote debugging
-//	"-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005",
+	"-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005",
 	]
 }
 
