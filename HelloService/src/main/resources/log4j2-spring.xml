@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xi="http://www.w3.org/2001/XInclude" 
+    configDebug="false" monitorInterval="1" status="ERROR" name="CONFIG_DEV">
+
+    <Properties>
+        <Property name="LOG_APP_LEVEL">DEBUG</Property>
+        <Property name="LOG_ROOT_LEVEL">ERROR</Property>
+
+
+        <!-- ignore the following classes in repoting exceptions -->
+        <Property name="filters">org.junit,org.apache.maven,sun.reflect,java.lang.reflect</Property>
+
+        <Property name="leveltag">%highlight{%-5level}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=cyan bold, DEBUG=green bold, TRACE=blue}</Property>
+
+        <Property name="loggertag">%.20c</Property>
+        <Property name="loggertag_debug">%.20c#%green{%.20method}</Property>
+        <Property name="exceptiontag_filtered">%xEx{filters(${filters})}</Property>
+
+    </Properties>
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${leveltag} ${loggertag_debug} %message%n%rEx"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <logger name="hello" level="${sys:LOG_APP_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+        <Root level="${sys:LOG_ROOT_LEVEL}">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+</Configuration>

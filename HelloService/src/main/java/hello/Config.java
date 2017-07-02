@@ -1,10 +1,21 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories
-@EnableTransactionManagement
-public class Config {}
+@EnableConfigurationProperties({SampleProperties.class})
+public class Config {
+
+    @Autowired
+    private SampleProperties sampleProperties;
+
+    public SampleProperties getSampleProperties() {
+        return sampleProperties;
+    }
+
+    public void setSampleProperties(SampleProperties sampleProperties) {
+        this.sampleProperties = sampleProperties;
+    }
+}
